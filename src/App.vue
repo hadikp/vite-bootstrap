@@ -1,34 +1,30 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/blog">Blog</RouterLink>
       </nav>
     </div>
   </header>
 
   <RouterView />
+  <footer>
+    <div class="footer-div">
+      &copy; 2022-2023 Hadik-Art, all rights reserved
+    </div>
+  </footer>
 </template>
 
 <style scoped>
-header {
+  header {
   line-height: 1.5;
   max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
 }
 
 nav {
@@ -82,4 +78,18 @@ nav a:first-of-type {
     margin-top: 1rem;
   }
 }
+
+.footer-div{
+    /* background-color: #bbb; */
+    color: orange;
+    font-size: 1.5rem;
+    position: absolute;
+    flex-shrink: 0;
+    /* bottom: 0; */
+    width: 100%;
+    height: 2.5rem; 
+    margin-top: 1rem;
+    text-align: center; 
+}
+
 </style>
