@@ -6,22 +6,22 @@ import { usePostStore } from '../stores/post'
 const error = ref('')
 const postData = usePostStore()
 
+const totalRows = postData.post.length
+const perPage = 2
+let page = 0
+let slicePost = []
+
 axios.get('api/post')
 .then(resp => {
       postData.post = resp.data;
      })
     .catch(err => (error.value = 'Valami hiba történt, próbáld újra!'))
-const totalRows = postData.post.length
-const perPage = 2
-const pages = (page) => console.log(page)
 
-const slicePost = computed(() => postData.post.slice(0,2))
-
-
+const paginate = num => {
+  page = num 
+  slicePost = computed(() => postData.post.slice(page,5))
+} 
   
-
-
-
 </script>
 
 <template>
@@ -43,9 +43,9 @@ const slicePost = computed(() => postData.post.slice(0,2))
     <nav aria-label="Page navigation example">
   <ul class="pagination">
     <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li @click="pages(1)" class="page-item"><a class="page-link" href="#">1</a></li>
-    <li @click="pages(2)" class="page-item"><a class="page-link" href="#">2</a></li>
-    <li @click="pages(3)" class="page-item"><a class="page-link" href="#">3</a></li>
+    <li @click="paginate(1)" class="page-item"><a class="page-link" href="#">1</a></li>
+    <li @click="paginate(2)" class="page-item"><a class="page-link" href="#">2</a></li>
+    <li @click="paginate(3)" class="page-item"><a class="page-link" href="#">3</a></li>
     <li class="page-item"><a class="page-link" href="#">Next</a></li>
   </ul>
 </nav>
