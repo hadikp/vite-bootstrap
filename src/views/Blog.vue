@@ -7,7 +7,7 @@ const error = ref('')
 const postData = usePostStore()
 
 const totalRows = postData.post.length
-const perPage = 2
+const perPage = 5
 let page = 0
 let slicePost = []
 
@@ -19,7 +19,8 @@ axios.get('api/post')
 
 const paginate = num => {
   page = num 
-  slicePost = computed(() => postData.post.slice(page,5))
+  const maxRowThisPage = page * perPage
+  slicePost = computed(() => postData.post.slice(maxRowThisPage-perPage,maxRowThisPage))
 } 
   
 </script>
@@ -40,16 +41,7 @@ const paginate = num => {
       </div>
     </div>
     </article>
-    <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li @click="paginate(1)" class="page-item"><a class="page-link" href="#">1</a></li>
-    <li @click="paginate(2)" class="page-item"><a class="page-link" href="#">2</a></li>
-    <li @click="paginate(3)" class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
-</nav>
-    <button type="button" class="btn btn-secondary btn-sm ">Small button</button>
+  
 
   </div>
 </template>
